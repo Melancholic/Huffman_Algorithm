@@ -1,10 +1,38 @@
 #include"String.h"
 #include<iostream>
 #include<cmath>
+inline double minicalc(double a,char b,double c);
 string::string(){
-  addStr();
-  completion();
+  int menu;
+  std::cout<<"\n1. по алфавиту\n2. По строке\n";
+  std::cin>>menu;
+  switch(menu){
+    case 1:{
+      std::cout<<"\n Введите символы(для прекращения введите '*') и их вероятность.\n ";
+      char sym=' ';
+      bool err=false;
+      while(!err){
+	std::cout<<"\nXi: ";
+	std::cin>>sym;
+	if(sym!='*'){
+	  addLetters(sym);
+  	  double a,c;
+	  char b;
+	  std::cout<<"\nP(xi): ";
+  	  std::cin>>a>>b>>c;
+	  addPoss(minicalc(a,b,c));
+	 }else {
+	    err=!err;
+	}
+    }
+  };break;
+  case 2:{
+    addStr();
+    completion();
+  };break;
+  }
 }
+
 
 void string::setPoss(double a,int i){
    poss[i]+=a;
@@ -184,3 +212,14 @@ node::node(){
   code="";
   bool tested=false;
 }
+
+double minicalc(double a, char s, double b){
+  switch(s){
+    case '/':return a/b;break;
+    case '+':return a+b;break;
+    case '-':return a-b;break;
+    case '*': return a*b;break;
+    default: return -1;
+   }
+ }
+
